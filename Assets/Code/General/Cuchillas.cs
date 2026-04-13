@@ -28,12 +28,12 @@ public class Cuchillas : MonoBehaviour
 	
 	IEnumerator Routine()
 	{
-		this.animation.Play("CuchillasBajan");
-		audio.Play();
+		this.GetComponent<Animation>().Play("CuchillasBajan");
+		GetComponent<AudioSource>().Play();
 		//this.audio.Play();
 		trigger.enabled = true;
 		yield return new WaitForSeconds(segundosAbajo);
-		this.animation.Play("CuchillasSuben");
+		this.GetComponent<Animation>().Play("CuchillasSuben");
 		trigger.enabled = false;
 		yield return new WaitForSeconds(segundosArriba);
 		loopend = true;

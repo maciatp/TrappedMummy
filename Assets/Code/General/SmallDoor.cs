@@ -7,7 +7,7 @@ public class SmallDoor : MonoBehaviour
 	public void Open()
 	{
 		//Temporarily destroy
-		audio.Play();
-		animation.Play("PuertaAbrir");
+		GetComponent<AudioSource>().Play();
+		GetComponent<Animation>().Play("PuertaAbrir");
 	}
 }

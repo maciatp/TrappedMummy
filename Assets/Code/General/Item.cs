@@ -18,19 +18,19 @@ public class Item : MonoBehaviour
 			switch(Generico.PlayerControl.itemsActuales)
 			{
 				case 0:
-					audio.clip = sound1;
+					GetComponent<AudioSource>().clip = sound1;
 					break;
 				
 				case 1:
-					audio.clip = sound2;
+					GetComponent<AudioSource>().clip = sound2;
 					break;
 					
 				case 2:
-					audio.clip = sound3;
+					GetComponent<AudioSource>().clip = sound3;
 					break;
 				
 			}
-			audio.Play();
+			GetComponent<AudioSource>().Play();
 			Generico.PlayerControl.itemsActuales++;	
 			picked = true;
 			gameObject.SetActiveRecursively(false);

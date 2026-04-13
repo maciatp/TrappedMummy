@@ -34,10 +34,10 @@ public class PlataformaTemporal : MonoBehaviour
 	
 	IEnumerator Warning()
 	{
-		this.animation.Play("BloqueTemblor");
+		this.GetComponent<Animation>().Play("BloqueTemblor");
 		yield return new WaitForSeconds(segundos);
 		falling = true;
-		this.animation.Play("BloqueCaida");
+		this.GetComponent<Animation>().Play("BloqueCaida");
 		yield return new WaitForSeconds(1);
 	}
 }

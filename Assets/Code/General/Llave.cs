@@ -13,7 +13,7 @@ public class Llave : MonoBehaviour
 			{
 				Generico.PlayerControl.llavesActuales++;	
 				GetComponent<MeshRenderer>().enabled = false;
-				audio.Play();
+				GetComponent<AudioSource>().Play();
 				tieneLlave = true;
 			}
 		}

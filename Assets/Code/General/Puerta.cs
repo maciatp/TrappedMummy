@@ -9,8 +9,8 @@ public class Puerta : MonoBehaviour
 		if(Generico.PlayerControl.llavesActuales == Generico.PlayerControl.llavesNecesarias)
 		{
 			print("open");
-			animation.Play("open");
-			audio.Play();
+			GetComponent<Animation>().Play("open");
+			GetComponent<AudioSource>().Play();
 			//animation.Play("open");
 		}
 	}

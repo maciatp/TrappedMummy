@@ -23,11 +23,11 @@ public class PinchosTrigger : MonoBehaviour
 	IEnumerator Routine()
 	{
 		yield return new WaitForSeconds(segundosAviso);
-		this.animation.Play("PinchosArriba");
-		audio.Play();
+		this.GetComponent<Animation>().Play("PinchosArriba");
+		GetComponent<AudioSource>().Play();
 		damage=true;
 		yield return new WaitForSeconds(segundosAbajo);
-		this.animation.Play("PinchosAbajo");
+		this.GetComponent<Animation>().Play("PinchosAbajo");
 		damage=false;
 		yield return new WaitForSeconds(segundosArriba);
 		loopend = true;

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class CustomJoystick : MonoBehaviour 
 {
@@ -20,7 +21,7 @@ public class CustomJoystick : MonoBehaviour
     private float fingerDownTime;
     private float firstDeltaTime = 0.5f;
  
-    private GUITexture gui;                             // Joystick graphic
+    private Image gui;                             // Joystick graphic
     private Rect defaultRect;                               // Default position / extents of the joystick graphic
     private Boundary guiBoundary = new Boundary();          // Boundary for joystick graphic
     private Vector2 guiTouchOffset;                     // Offset to apply to touch input
@@ -33,10 +34,10 @@ public class CustomJoystick : MonoBehaviour
     public void Start()
     {
         // Cache this component at startup instead of looking up every frame   
-        gui = (GUITexture) GetComponent( typeof(GUITexture) );
-       
+        gui = (Image) GetComponent( typeof(Image) );
+
         // Store the default rect for the gui, so we can snap back to it
-        defaultRect = gui.pixelInset;   
+        defaultRect = gui.rectTransform.rect;
     }
  
     public void Disable()
@@ -101,8 +102,8 @@ public class CustomJoystick : MonoBehaviour
 					gui.enabled = true;
 					
 					defaultRect = new Rect(touch.position.x - 50, touch.position.y - 50, 100, 100);
-					
-					gui.pixelInset = defaultRect;					
+
+                    gui.rectTransform.localPosition = defaultRect.position;					
                                    
                 }              
        
@@ -122,10 +123,10 @@ public class CustomJoystick : MonoBehaviour
 					}
              
                         // Change the location of the joystick graphic to match where the touch is
-                        tmprect = gui.pixelInset;
+                        tmprect = gui.rectTransform.rect;
 						tmprect.x = touch.position.x;
 						tmprect.y = touch.position.y;
-                        gui.pixelInset = tmprect;
+                    gui.rectTransform.localPosition = tmprect.position;
                    
                     if ( touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled )
 					{

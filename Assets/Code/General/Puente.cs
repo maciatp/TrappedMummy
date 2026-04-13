@@ -9,8 +9,8 @@ public class Puente : MonoBehaviour
 	{
 		if(other.gameObject == Generico.Player)
 		{
-			audio.Play();
-			animation.Play("Puente");
+			GetComponent<AudioSource>().Play();
+			GetComponent<Animation>().Play("Puente");
 		}
 		else
 		{
@@ -22,8 +22,8 @@ public class Puente : MonoBehaviour
 	{
 		if(other.gameObject == Generico.Player)
 		{
-			audio.Stop();
-			animation.Stop();	
+			GetComponent<AudioSource>().Stop();
+			GetComponent<Animation>().Stop();	
 		}
 	}
 }

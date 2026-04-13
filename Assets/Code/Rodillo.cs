@@ -36,7 +36,7 @@ public class Rodillo : MonoBehaviour
 		}
 		else
 		{	
-			rigidbody.MovePosition(rigidbody.position + direction * Time.deltaTime * (relativeVelocity));	
+			GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position + direction * Time.deltaTime * (relativeVelocity));	
 		}
 		distanceToPlayer = (Generico.Player.transform.position - transform.position).magnitude;
 	}

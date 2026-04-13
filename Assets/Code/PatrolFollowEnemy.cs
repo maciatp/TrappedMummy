@@ -31,7 +31,7 @@ public class PatrolFollowEnemy : MonoBehaviour
 		initialPos = transform.position;
 		nextPoint = 0;
 		controller = GetComponent<CharacterController>();
-		animation["Walk"].speed = 3;
+		GetComponent<Animation>()["Walk"].speed = 3;
 		radioBase = radio;
 		ChangePatrolPoint();
 	}

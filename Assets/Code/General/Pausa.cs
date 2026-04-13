@@ -1,24 +1,26 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Pausa : MonoBehaviour
 {
 	public GUISkin skin;
-	private GUITexture button;
+	private Image button;
     
     public void OnEnable ()
     {
-		Generico.joystick.transform.parent.gameObject.SetActiveRecursively(false);
+		Generico.joystick.transform.parent.gameObject.SetActive(false);
 		if(!Generico.mute)
 		{
-			transform.FindChild("Mute").renderer.enabled = false; 	
+			transform.Find("Mute").GetComponent<Renderer>().enabled = false; 	
 		}
 		else
 		{
-			transform.FindChild("Mute").renderer.enabled = true;
+			transform.Find("Mute").GetComponent<Renderer>().enabled = true;
 		}
 		Generico.timer.GetComponent<Timer>().StopTime();
-        button = this.GetComponent<GUITexture>();
+        button = this.GetComponent<Image>();
 		//button.pixelInset = new Rect(0, 152.4541f,Screen.width,-9.03f);
             
     }
@@ -30,24 +32,24 @@ public class Pausa : MonoBehaviour
 		if (GUI.Button (new Rect (Screen.width/(1.2f), Screen.height/9.5f,Screen.width/5,Screen.height/5), "")) 
 		{
 			//niveles
-			Application.LoadLevel("menu_niveles");
+			SceneManager.LoadScene("menu_niveles");
 		}
 		if (GUI.Button (new Rect (Screen.width/(1.2f), Screen.height/3.2f,Screen.width/5,Screen.height/5), "")) 
 		{
-			//reintentar
-			Application.LoadLevel(Application.loadedLevel);
+            //reintentar
+            SceneManager.LoadScene(Application.loadedLevel);
 		}
 		if (GUI.Button (new Rect (Screen.width/(1.2f), Screen.height/1.95f,Screen.width/5,Screen.height/5), "")) 
 		{
 			//MUTE BUTTON
 			if(Generico.mute)
 			{
-				transform.FindChild("Mute").renderer.enabled = false; 	
+				transform.Find("Mute").GetComponent<Renderer>().enabled = false; 	
 				Generico.mute = false;
 			}
 			else
 			{
-				transform.FindChild("Mute").renderer.enabled = true;
+				transform.Find("Mute").GetComponent<Renderer>().enabled = true;
 				Generico.mute = true;
 			}
 		}

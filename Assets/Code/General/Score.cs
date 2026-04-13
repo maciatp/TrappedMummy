@@ -1,10 +1,12 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Score : MonoBehaviour
 {
 	public GUISkin skin;
-	private GUITexture button;
+	private Image button;
 	public Transform star1;
 	public Transform star2;
 	public Transform star3;
@@ -16,11 +18,11 @@ public class Score : MonoBehaviour
     
     void OnEnable () 
 	{
-		pauseButton.gameObject.SetActiveRecursively(false);
+		pauseButton.gameObject.SetActive(false);
 		Generico.timer.GetComponent<Timer>().StopTime();
-		Generico.joystick.transform.parent.gameObject.SetActiveRecursively(false);
-		star2.renderer.enabled = false;
-		star3.renderer.enabled = false;
+		Generico.joystick.transform.parent.gameObject.SetActive(false);
+		star2.GetComponent<Renderer>().enabled = false;
+		star3.GetComponent<Renderer>().enabled = false;
 		
 		int items = Generico.PlayerControl.itemsActuales;
 		print("items: " + items);
@@ -52,11 +54,11 @@ public class Score : MonoBehaviour
 		
 		if(sumapuntos >= 1000)
 		{
-			star2.renderer.enabled = true;
+			star2.GetComponent<Renderer>().enabled = true;
 		}
 		if(sumapuntos >= 2000)
 		{
-			star3.renderer.enabled = true;	
+			star3.GetComponent<Renderer>().enabled = true;	
 		}
 		print("Sumapuntos: " + sumapuntos);
 		text.GetComponent<TextMesh>().text = sumapuntos.ToString();
@@ -67,12 +69,12 @@ public class Score : MonoBehaviour
 		GUI.skin = skin;
 		if (GUI.Button (new Rect (Screen.width/(1.4f), Screen.height/3.2f,Screen.width/5,Screen.height/5), "")) 
 		{
-			Application.LoadLevel(Application.loadedLevel);
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 		}
 		
 		if (GUI.Button (new Rect (Screen.width/(1.4f), Screen.height/1.8f,Screen.width/5,Screen.height/5), "")) 
 		{
-			Application.LoadLevel(Application.loadedLevel+1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
 		}
 		
 	}

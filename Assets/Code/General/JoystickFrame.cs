@@ -1,15 +1,16 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class JoystickFrame : MonoBehaviour 
 {
 
 	public CustomJoystick Joystick;
-	private GUITexture gui;   
+	private Image gui;   
 	
 	void Start()
 	{
-		gui = (GUITexture)GetComponent(typeof(GUITexture));	
+		gui = (Image)GetComponent(typeof(Image));	
 	}
 	
 	// Update is called once per frame
@@ -18,7 +19,7 @@ public class JoystickFrame : MonoBehaviour
 		if(Joystick.initPos != Vector2.zero)
 		{
 			gui.enabled = true;
-			gui.pixelInset = new Rect(Joystick.initPos.x, Joystick.initPos.y, 100, 100);
+			gui.rectTransform.rect.Set(Joystick.initPos.x, Joystick.initPos.y, 100, 100);
 			
 		}
 		else

@@ -1,23 +1,24 @@
     using UnityEngine;
     using System.Collections;
-    //////////////////////////////////////////////////////////////
-    // Joystick.js
-    // Penelope Tutorial
-    //
-    // Joystick creates a movable joystick (via GUITexture) that
-    // handles touch input, taps, and phases. Dead zones can control
-    // where the joystick input gets picked up and can be normalized.
-    //
-    // Optionally, you can enable the touchPad property from the editor
-    // to treat this Joystick as a TouchPad. A TouchPad allows the finger
-    // to touch down at any point and it tracks the movement relatively
-    // without moving the graphic
-    //////////////////////////////////////////////////////////////
-     
-    // A simple class for bounding how far the GUITexture will move
-    // converted to CS by Aaron Blohowiak, Aug 2009
-     
-    public class Boundary
+using UnityEngine.UI;
+//////////////////////////////////////////////////////////////
+// Joystick.js
+// Penelope Tutorial
+//
+// Joystick creates a movable joystick (via GUITexture) that
+// handles touch input, taps, and phases. Dead zones can control
+// where the joystick input gets picked up and can be normalized.
+//
+// Optionally, you can enable the touchPad property from the editor
+// to treat this Joystick as a TouchPad. A TouchPad allows the finger
+// to touch down at any point and it tracks the movement relatively
+// without moving the graphic
+//////////////////////////////////////////////////////////////
+
+// A simple class for bounding how far the GUITexture will move
+// converted to CS by Aaron Blohowiak, Aug 2009
+
+public class Boundary
     {
         public Vector2 min = Vector2.zero;
         public Vector2 max = Vector2.zero;
@@ -42,7 +43,7 @@
         private float fingerDownTime;
         private float firstDeltaTime = 0.5f;
      
-        private GUITexture gui;                             // Joystick graphic
+        private Image gui;                             // Joystick graphic
         private Rect defaultRect;                               // Default position / extents of the joystick graphic
         private Boundary guiBoundary = new Boundary();          // Boundary for joystick graphic
         private Vector2 guiTouchOffset;                     // Offset to apply to touch input
@@ -55,16 +56,16 @@
         public void Start()
         {
             // Cache this component at startup instead of looking up every frame   
-            gui = (GUITexture) GetComponent( typeof(GUITexture) );
+            gui = (Image) GetComponent( typeof(Image) );
            
             // Store the default rect for the gui, so we can snap back to it
-            defaultRect = gui.pixelInset;   
+            defaultRect = gui.rectTransform.rect;   
            
             if ( touchPad )
             {
                 // If a texture has been assigned, then use the rect ferom the gui as our touchZone
-                if ( gui.texture )
-                    touchZone = gui.pixelInset;
+                if ( gui.sprite )
+                    touchZone = gui.rectTransform.rect;
             }
             else
             {              
@@ -87,14 +88,14 @@
      
         public void Disable()
         {
-            gameObject.active = false;
+            gameObject.SetActive(false);
             enumeratedJoysticks = false;
         }
      
         public void ResetJoystick()
         {
             // Release the finger control and set the joystick back to the default position
-            gui.pixelInset = defaultRect;
+            gui.rectTransform.localPosition = defaultRect.position;
             lastFingerId = -1;
             position = Vector2.zero;
             fingerDownPos = Vector2.zero;
@@ -176,7 +177,7 @@
 						
 						defaultRect = new Rect(touch.position.x, touch.position.y, 50, 50);
 						
-						gui.pixelInset = defaultRect;
+						gui.rectTransform.localPosition = defaultRect.position;
 					
 						guiTouchOffset.x = defaultRect.width;
                 		guiTouchOffset.y = defaultRect.height;
@@ -224,10 +225,10 @@
                         else
                         {                  
                             // Change the location of the joystick graphic to match where the touch is
-                            tmprect = gui.pixelInset;
+                            tmprect = gui.rectTransform.rect;
                             tmprect.x = Mathf.Clamp( guiTouchPos.x, guiBoundary.min.x, guiBoundary.max.x );
                             tmprect.y = Mathf.Clamp( guiTouchPos.y, guiBoundary.min.y, guiBoundary.max.y );    
-                            gui.pixelInset = tmprect;
+                            gui.rectTransform.localPosition = tmprect.position;
                         }
                        
                         if ( touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled )
@@ -239,8 +240,8 @@
             if ( !touchPad )
             {
                 // Get a value between -1 and 1 based on the joystick graphic location
-                position.x = ( gui.pixelInset.x + guiTouchOffset.x - guiCenter.x ) / guiTouchOffset.x;
-                position.y = ( gui.pixelInset.y + guiTouchOffset.y - guiCenter.y ) / guiTouchOffset.y;
+                position.x = (gui.rectTransform.localPosition.x + guiTouchOffset.x - guiCenter.x ) / guiTouchOffset.x;
+                position.y = (gui.rectTransform.localPosition.y + guiTouchOffset.y - guiCenter.y ) / guiTouchOffset.y;
             }
 		}
             // Adjust for dead zone 

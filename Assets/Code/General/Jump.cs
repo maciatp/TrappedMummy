@@ -1,14 +1,15 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Jump : MonoBehaviour
 {
-	private GUITexture button;
+	private Image button;
     
     public void Start ()
     {
-            button = this.GetComponent<GUITexture>();
-		button.pixelInset = new Rect(Screen.width/2, 0,Screen.width,Screen.height);
+            button = this.GetComponent<Image>();
+		button.rectTransform.rect.Set(Screen.width/2, 0,Screen.width,Screen.height);
             
     }
     

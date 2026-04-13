@@ -20,7 +20,7 @@ public class LlaveTemporal : MonoBehaviour
 			
 			if(!tieneLlave)
 			{
-				audio.Play();
+				GetComponent<AudioSource>().Play();
 				doorScript.Open();
 				GetComponent<MeshRenderer>().enabled = false;
 				tieneLlave = true;

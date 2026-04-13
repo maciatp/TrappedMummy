@@ -1,15 +1,16 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class BotonPausa : MonoBehaviour
 {
 	public GUISkin skin;
-	private GUITexture button;
+	private Image button;
 	public GameObject MenuPausa;
     
     public void Start ()
     {
-        button = this.GetComponent<GUITexture>();
+        button = this.GetComponent<Image>();
             
     }
     
@@ -19,7 +20,7 @@ public class BotonPausa : MonoBehaviour
 		GUI.skin = skin;
 		if (GUI.Button (new Rect (0, 0,Screen.width/5.5f,Screen.height/4f), "")) 
 		{
-			MenuPausa.SetActiveRecursively(true);
+			MenuPausa.SetActive(true);
 		}
 	}
 

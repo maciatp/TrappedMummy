@@ -42,7 +42,7 @@ public class PlataformaMovil : MonoBehaviour
 		{	
 			if(Time.time > stopTime)
 			{
-				rigidbody.MovePosition(rigidbody.position + direction * Time.deltaTime * (relativeVelocity));	
+				GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position + direction * Time.deltaTime * (relativeVelocity));	
 			}
 		}
 		distanceToPlayer = (Generico.Player.transform.position - transform.position).magnitude;

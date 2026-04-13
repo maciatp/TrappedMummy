@@ -48,7 +48,7 @@ public class PlayerControl : MonoBehaviour
 	void Start()
 	{
 		controller = GetComponent<CharacterController>();
-		animation["Walk"].speed = 2;
+		GetComponent<Animation>()["Walk"].speed = 2;
 	}
 	
 	/*void Update() 
@@ -125,21 +125,21 @@ public class PlayerControl : MonoBehaviour
 		if(dirInput != Vector3.zero)
 		{
 			
-			animation.Play("Walk");
+			GetComponent<Animation>().Play("Walk");
 			//WALK SOUND
-			audio.clip = SonidoPasos;
-			audio.loop = true;
-			if(!audio.isPlaying)
+			GetComponent<AudioSource>().clip = SonidoPasos;
+			GetComponent<AudioSource>().loop = true;
+			if(!GetComponent<AudioSource>().isPlaying)
 			{
-				audio.Play();
+				GetComponent<AudioSource>().Play();
 			}
 			
 			moveDirection = dirInput;
 		}
 		else
 		{
-			animation.Play("Idle");	
-			audio.Stop();
+			GetComponent<Animation>().Play("Idle");	
+			GetComponent<AudioSource>().Stop();
 		}
 
 		moveDirection.y = -gravity/10;
@@ -147,9 +147,9 @@ public class PlayerControl : MonoBehaviour
 		
 		if(Input.GetButton ("Jump") || Generico.buttons[0].GetComponent<Jump>().isTouching())
 		{
-			audio.clip = SonidoSalto;
-			audio.loop = false;
-			audio.Play();
+			GetComponent<AudioSource>().clip = SonidoSalto;
+			GetComponent<AudioSource>().loop = false;
+			GetComponent<AudioSource>().Play();
 			actionJump = true;
 			moveDirection.y = jumpSpeed;
 			transform.position = new Vector3(transform.position.x, transform.position.y + MIN_DISTANCE_GROUND, transform.position.z); 
@@ -159,7 +159,7 @@ public class PlayerControl : MonoBehaviour
 	
 	void airMove()
 	{
-		animation.Play("Jump");
+		GetComponent<Animation>().Play("Jump");
 		if(dirInput != Vector3.zero)
 		{
 			moveDirection.x = dirInput.x;
